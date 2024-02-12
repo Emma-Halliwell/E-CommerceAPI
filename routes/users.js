@@ -37,7 +37,7 @@ router.post('/login', async(req, res, next) => {
       res.status(400).json({ error : "Password Incorrect" });
     }
   } else {
-    res.status(404).json({ error : "User doen not exist" });
+    res.status(404).json({ error : "User does not exist" });
   }
 });
 
