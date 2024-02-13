@@ -58,4 +58,15 @@ router.get('/profile', async (req, res, next) => {
   res.status(200).json(user);
 });
 
+// Updates username in Users table
+router.put('/profile/:id', async (req, res, next) => {
+  await User.update(
+    { username: req.body.username },
+    { where : { id : req.params.id }}
+  )
+  .then(function(rowsUpdated) {
+    res.json(rowsUpdated)
+  }).catch(next)
+});
+
 module.exports = router;
