@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
 
+// Creates a new user
 router.post('/register', async(req, res, next) => {
   //res.status(201).json(req.body);
   //add new user and return 201
@@ -26,6 +27,7 @@ router.post('/register', async(req, res, next) => {
   res.status(201).json(created_user);
 });
 
+// logins in an existing user
 router.post('/login', async(req, res, next) => {
   const user = await User.findOne({ where : {username : req.body.username }});
   if (user) {
@@ -41,6 +43,7 @@ router.post('/login', async(req, res, next) => {
   }
 });
 
+// Get a single user profile
 router.get('/profile', async (req, res, next) => {
   try {
     let token = req.headers['authorization'].split(" ")[1];
