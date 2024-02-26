@@ -7,6 +7,7 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
 const User = Models.User;
 dotenv.config();
+const pool = require('../pool');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
