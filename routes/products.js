@@ -1,7 +1,7 @@
 const pool = require('../pool');
 
 const getProducts = async (req, res) => {
-    await pool.query('SELECT * FROM products', (error, results) => {
+    await pool.query('SELECT * FROM products JOIN price ON products.price = price.id', (error, results) => {
         if (error) {
             res.status(404).json({ "msg" : "Products table not found" });
         }
@@ -12,7 +12,7 @@ const getProducts = async (req, res) => {
 // Gets all products with the same category
 const getProductsCategory = async (req, res) => {
     const { category } = req.body;
-    await pool.query('SELECT * FROM products WHERE category = $1', [category], (error, results) => {
+    await pool.query('SELECT * FROM products JOIN price ON products.price = price.id WHERE category = $1', [category], (error, results) => {
         if (error) {
             res.status(404).json({ "msg" : "Category could be found" });
         }
@@ -21,9 +21,10 @@ const getProductsCategory = async (req, res) => {
 };
 
 // Gets a single products
-const getProductsById = async (req, res) => {
+// See if you can JOIN price to this logic later
+const getProductsById = (req, res) => {
     const id = parseInt(req.params.id);
-    await pool.query('SELECT * FROM products WHERE id = $1', [id], (error, results) => {
+    pool.query('SELECT * FROM products WHERE id = $1', [id], (error, results) => {
         if (error) {
             res.status(404).json({ "msg" : "Product could not be found" });
         }

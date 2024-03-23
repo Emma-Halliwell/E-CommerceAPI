@@ -42,6 +42,13 @@ app.get('/products/:id', db.getProductsById);
 app.post('/cart', cart.postCart);
 app.get('/cart/:cart_id', cart.getCart);
 
+// Checkout
+app.post('/cart/:cart_id/checkout', cart.checkout);
+
+// Order
+app.post('/order/:checkout_id', cart.postOrder);
+app.get('/order', cart.getOrder);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

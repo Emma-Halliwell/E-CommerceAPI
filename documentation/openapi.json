@@ -1,0 +1,462 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "E-CommerceAPI",
+    "version": "0.0.0",
+    "description": "E-Commerce project for Codecademy."
+  },
+  "paths": {
+    "/users/register": {
+      "summary": "Posts new user.",
+      "description": "This path will post a new user to a database. It will also encrypt the user's password for security purposes. ",
+      "post": {
+        "summary": "Posts a new user.",
+        "description": "Post a new user to databse that will encrypt the password for security purposes. ",
+        "operationId": "post_newUser",
+        "requestBody": {
+          "description": "A new user information.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "New_User"
+        ]
+      }
+    },
+    "/users/login": {
+      "summary": "Posts an existing user.",
+      "description": "This path allows an existing user to login to the E-CommerceAPI. ",
+      "post": {
+        "summary": "Posts an existing user.",
+        "description": "Logs in an existing user.",
+        "operationId": "post_user",
+        "requestBody": {
+          "description": "Log in information",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Login_user"
+        ]
+      }
+    },
+    "/users/profile": {
+      "summary": "Gets a user's profile.",
+      "description": "This path allows a  user to get their profile.",
+      "get": {
+        "summary": "Gets a user's profile.",
+        "description": "Gets the user's profile for the specific user. ",
+        "operationId": "get_userProfile",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Profile": {
+                    "value": "{\n    \"id\": 1,\n    \"email\": \"admin1@example.co.uk\",\n    \"username\": \"admin\",\n    \"createdAt\": \"2024-02-12T16:33:56.567Z\",\n    \"updatedAt\": \"2024-02-13T17:11:20.336Z\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Users_Profile"
+        ]
+      }
+    },
+    "/users/profile/{id}": {
+      "summary": "Put into user's profile.",
+      "description": "This path allows users to update their username.",
+      "put": {
+        "summary": "Updates the users profile.",
+        "description": "Allows a user to update their username. Response will be the updated row.",
+        "operationId": "Put UserProfile",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the user.",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "updateProfile": {
+                    "value": "[\n    1\n]"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Update_Profile"
+        ]
+      }
+    },
+    "/products": {
+      "summary": "Gets all products in the app.",
+      "description": "This path will get all the products the app has to offer.",
+      "get": {
+        "summary": "Gets all products.",
+        "description": "Gets all the products the apps have to offer. ",
+        "operationId": "Get_Products",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "Products": {
+                    "value": "[\n    {\n        \"id\": 1,\n        \"name\": \"Flying Discs\",\n        \"description\": \"Plastic flying disc used for throwing and catching.\",\n        \"category\": \"play\",\n        \"product_quantity\": 1,\n        \"price\": 1,\n        \"amount\": \"£1.50\"\n    },\n    {\n        \"id\": 2,\n        \"name\": \"Skipping Ropes\",\n        \"description\": \"Skipping Ropes\",\n        \"category\": \"fitness\",\n        \"product_quantity\": 1,\n        \"price\": 2,\n        \"amount\": \"£2.00\"\n    },\n    {\n        \"id\": 3,\n        \"name\": \"Mesh Bag\",\n        \"description\": \"Mesh bag, good for storing balls or bigger equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 3,\n        \"amount\": \"£5.00\"\n    }\n]"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Products"
+        ]
+      }
+    },
+    "/products/category": {
+      "summary": "Gets a specific category.",
+      "description": "This path gets all products from a specific category.",
+      "get": {
+        "summary": "Get products from a specific category.",
+        "description": "Gets all the products with a specific category.",
+        "operationId": "Get_ProductCategory",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "productsCategory": {
+                    "value": "[\n    {\n        \"id\": 3,\n        \"name\": \"Mesh Bag\",\n        \"description\": \"Mesh bag, good for storing balls or bigger equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 3,\n        \"amount\": \"£5.00\"\n    },\n    {\n        \"id\": 5,\n        \"name\": \"Tubular Football Bag\",\n        \"description\": \"Perfect for carrying footballs in a compacted way.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 5,\n        \"amount\": \"£8.00\"\n    },\n    {\n        \"id\": 8,\n        \"name\": \"Basic Bag\",\n        \"description\": \"Basic bag for carrying equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 8,\n        \"amount\": \"£16.00\"\n    },\n    {\n        \"id\": 9,\n        \"name\": \"Heavy Duty Bag\",\n        \"description\": \"Heavy duty bag used for carrying equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 9,\n        \"amount\": \"£17.00\"\n    },\n    {\n        \"id\": 15,\n        \"name\": \"Pro Bag\",\n        \"description\": \"Bag with wheels for carrying equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 15,\n        \"amount\": \"£55.00\"\n    }\n]"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Product_Category"
+        ]
+      }
+    },
+    "/products/{id}": {
+      "summary": "Gets a specific piece of equipment.",
+      "description": "This path gets a specific piece of equipment from the database.",
+      "get": {
+        "summary": "Gets a specific product.",
+        "description": "Gets a specific product from the database of products.",
+        "operationId": "Get_ProductById",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The id of the product",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "productsId": {
+                    "value": "[\n    {\n        \"id\": 20,\n        \"name\": \"Pro Bag\",\n        \"description\": \"Bag with wheels for carrying equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 15\n    }\n]"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Product_Id"
+        ]
+      }
+    },
+    "/cart": {
+      "summary": "Posts cart to the database.",
+      "description": "This path posts the content of the cart to the database to be retrieved later.",
+      "post": {
+        "summary": "Posts to the cart database.",
+        "description": "Posts items to the cart database.",
+        "operationId": "Get_Cart",
+        "requestBody": {
+          "description": "Needed to post a cart.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Cart"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Cart"
+        ]
+      }
+    },
+    "/cart/{cart_id}": {
+      "summary": "Gets a specific cart.",
+      "description": "This path gets a specific cart from the database.",
+      "get": {
+        "summary": "Gets a specific cart.",
+        "description": "Gets a specific cart from the cart database.",
+        "operationId": "Get_CartById",
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "description": "The id of the cart",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "cartID": {
+                    "value": "[\n    {\n        \"session_id\": 1,\n        \"cart_id\": 1,\n        \"username\": \"janeDoe\",\n        \"product_id\": 20,\n        \"id\": 15,\n        \"name\": \"Pro Bag\",\n        \"description\": \"Bag with wheels for carrying equipment.\",\n        \"category\": \"storage\",\n        \"product_quantity\": 1,\n        \"price\": 15,\n        \"amount\": \"£55.00\"\n    }\n]"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Cart_Id"
+        ]
+      }
+    },
+    "/cart/{cart_id}/checkout": {
+      "summary": "Post cart to checkout.",
+      "description": "This path posts to the checkout database.",
+      "post": {
+        "summary": "Posts cart to checkout",
+        "description": "Posts the cart to the checkout along with the usernaem of the user.",
+        "operationId": "Post_CartById",
+        "parameters": [
+          {
+            "name": "cart_id",
+            "in": "path",
+            "description": "The id of the cart",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Needed to post to checkout.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Checkout"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Cart_Id_Checkout"
+        ]
+      }
+    },
+    "/order/{checkout_id}": {
+      "summary": "Posts to orders.",
+      "description": "This path posts to the orders database.",
+      "post": {
+        "summary": "Posts checkout to orders database.",
+        "description": "Posts the checkout database to teh orders database.",
+        "operationId": "Post_orders",
+        "parameters": [
+          {
+            "name": "checkout_id",
+            "in": "path",
+            "description": "The id of the checkout",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Needed to post to orders",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Order"
+              }
+            }
+          }
+        },
+        "responses": {
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Orders_Id"
+        ]
+      }
+    },
+    "/order": {
+      "summary": "Gets all orders in database.",
+      "description": "This path gets all order from the orders database.",
+      "get": {
+        "summary": "Gets all the orders.",
+        "description": "Gets all the orders from the orders database.",
+        "operationId": "Get_Orders",
+        "responses": {
+          "200": {
+            "description": "Successful response.",
+            "content": {
+              "application/json": {
+                "examples": {
+                  "order": {
+                    "value": "{\n  \"username\": \"janeDoe\",\n  \"checkout_id\": 1,\n  \"first_name\": \"Jane\",\n  \"middle_name\": null,\n  \"last_name\": \"Doe\",\n  \"email\": \"janedoe@example.co.uk\",\n  \"phone_number\": \"07212398565\",\n  \"address_line_1\": \"Example House\",\n  \"address_line_2\": \"Example Road\",\n  \"address_city\": \"Example\",\n  \"address_county\": \"Example County\",\n  \"address_postcode\": \"EX167LE\",\n  \"address_country\": \"Example Kingdom\",\n  \"id\": 1,\n  \"cart_id\": 1,\n  \"provider\": \"visa\"\n}"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "Default error sample response"
+          }
+        },
+        "tags": [
+          "Orders"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Register": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Login": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        }
+      },
+      "Cart": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "product_id": {
+            "type": "string"
+          }
+        }
+      },
+      "Checkout": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          },
+          "provider": {
+            "type": "string"
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

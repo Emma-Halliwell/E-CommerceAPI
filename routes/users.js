@@ -73,4 +73,6 @@ router.put('/profile/:id', async (req, res, next) => {
   }).catch(next)
 });
 
+// Try i to implement changes to user_details table.
+
 module.exports = router;
