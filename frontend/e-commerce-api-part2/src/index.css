@@ -11,3 +11,35 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Header Component */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 34px;
+  align-items: center;
+  border: solid red 5px; /* Remove later */
+}
+
+/* Sign Up Component */
+#signUp-title {
+  text-align: center;
+  font-size: 2.5em;
+  color: rgba(185, 2, 185, 0.877);
+}
+
+.signUp-form {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.signUp-label {
+  color: rgba(153, 11, 153, 0.904);
+  font-size: 1.5em;
+}
+
+#email, #username, #password {
+  font-size: 1em;
+}
