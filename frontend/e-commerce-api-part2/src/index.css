@@ -21,6 +21,35 @@ code {
   border: solid red 5px; /* Remove later */
 }
 
+/* Home Component */
+#home-title {
+  text-align: center;
+  font-size: 3em;
+  color: rgba(19, 203, 228, 0.952);
+}
+
+#statement {
+  text-align: center;
+  font-size: 2em;
+}
+
+.search-bar {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#search {
+  font-size: 2em;
+}
+
+.search-submit {
+  border: none;
+  background: none;
+  font-size: 1.8em;
+}
+
 /* Sign Up Component */
 #signUp-title {
   text-align: center;

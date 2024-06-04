@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-// import { useHistory } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 
 export default function SignUp () {
     const [formData, setFormData] = useState("");
-    // const history = useHistory();
+    // const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({...formData, [e.target.id]: e.target.value});  
