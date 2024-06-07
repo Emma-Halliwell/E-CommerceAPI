@@ -18,6 +18,7 @@ code {
   flex-wrap: wrap;
   column-gap: 34px;
   align-items: center;
+  margin-bottom: 2em;
   border: solid red 5px; /* Remove later */
 }
 
@@ -75,8 +76,9 @@ code {
 
 /* Footer Component */
 .footer {
+  margin-top: 2em;
   background-color: rgba(44, 44, 44, 0.781);
-  border: solid red 5px; /* Remove later */
+  /* border: solid red 5px; Remove later */
 }
 
 .website-links,
@@ -85,7 +87,7 @@ code {
   display: inline-block;
   width: 32.58%;
   text-align: center;
-  border: solid blue 5px; /* Remove later */
+  /* border: solid blue 5px; Remove later */
 }
 
 .footer-title,
@@ -94,5 +96,5 @@ code {
   margin: 0.25em;
   font-size: 0.8em;
   color: rgb(247, 242, 242);
-  border: solid green 1px; /* Remove later */
+  /* border: solid green 1px; Remove later */
 }
