@@ -51,27 +51,54 @@ code {
   font-size: 1.8em;
 }
 
-/* Sign Up Component */
-#signUp-title {
+/* Sign Up Component / Sign In Component */
+#signUp-title,
+#signIn-title {
   text-align: center;
   font-size: 2.5em;
   color: rgba(185, 2, 185, 0.877);
 }
 
-.signUp-form {
+.signUp-form,
+.signIn-form {
   display: block;
   justify-content: center;
   align-items: center;
   text-align: center;
 }
 
-.signUp-label {
+.signUp-label,
+.signIn-label {
   color: rgba(153, 11, 153, 0.904);
   font-size: 1.5em;
+  font-weight: 500;
+  margin: 0.5em 0 0.5em 0;
 }
 
-#email, #username, #password {
+#email,
+#username,
+#password,
+#signIn-username,
+#signIn-password {
   font-size: 1em;
+  margin: 0.75em;
+}
+
+.signUp-submit,
+.signIn-submit {
+  font-size: 1.25em;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  border: none;
+  background-color: rgba(185, 2, 185, 0.877);
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 0.5em;
+}
+
+.signIn-submit:hover {
+  background: none;
+  color: black;
 }
 
 /* Footer Component */

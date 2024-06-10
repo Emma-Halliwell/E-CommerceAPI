@@ -10,6 +10,7 @@ export default function Header () {
             <img src={companyLogo} alt="Sports Galore Logo" width="100px" height="100px"/>
             <NavLink to="/">Home</NavLink>
             <NavLink to="register">Register</NavLink>
+            <NavLink to='login'>Sign In</NavLink>
         </div>
     )
 }
