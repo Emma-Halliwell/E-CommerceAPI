@@ -56,6 +56,7 @@ export default function SignUp () {
                             id="email"
                             name="email"
                             placeholder="Email"
+                            autoComplete="email"
                             onChange={handleChange}
                         />
                     </div>
@@ -67,7 +68,8 @@ export default function SignUp () {
                             type="text" 
                             id="username" 
                             name="username"
-                            placeholder="Username" 
+                            placeholder="Username"
+                            autoComplete="username"
                             onChange={handleChange}
                         />
                     </div>
@@ -80,6 +82,7 @@ export default function SignUp () {
                             id="password"
                             name="password"
                             placeholder="Password"
+                            autoComplete="new-password"
                             onChange={handleChange}
                         />
                     </div>
