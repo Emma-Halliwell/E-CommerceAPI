@@ -42,7 +42,7 @@ export default function SignUp () {
             setErrorMessage(error.message);
             setLoading(false);
         }
-    }
+    };
 
     return (
         <section>
