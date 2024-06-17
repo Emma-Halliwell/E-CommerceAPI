@@ -12,6 +12,22 @@ code {
     monospace;
 }
 
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  color: rgba(185, 2, 185, 0.877);
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(19, 204, 228);
+  font-size: 1.5em;
+  border: 1px solid rgb(19, 204, 228);
+  border-radius: 5px;
+  box-shadow: 2px 4px rgb(19, 204, 228);
+  padding: 5px; 
+}
+
 /* Header Component */
 .header {
   display: flex;
@@ -24,8 +40,7 @@ code {
 
 /* Home Component */
 #home-title {
-  text-align: center;
-  font-size: 3em;
+  font-size: 4em;
   color: rgba(19, 203, 228, 0.952);
 }
 
@@ -52,13 +67,6 @@ code {
 }
 
 /* Sign Up Component / Sign In Component */
-#signUp-title,
-#signIn-title {
-  text-align: center;
-  font-size: 2.5em;
-  color: rgba(185, 2, 185, 0.877);
-}
-
 .signUp-form,
 .signIn-form {
   display: block;
@@ -101,11 +109,54 @@ code {
   color: black;
 }
 
+/* Profile Component */
+/* #profile-title {
+  font-size: 3em;
+} */
+.box-card {
+  display: flex;
+  margin: 20px 0 20px 0;
+  padding: 5px;
+}
+
+.inner-box {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 32%;
+  margin: 3px;
+  padding-left: 12px;
+  border: 1px solid black;
+  border-radius: 15px;
+  background-color: rgba(221, 221, 221, 0.932);
+  box-shadow: 3px 4px rgb(78, 77, 77);
+}
+
+.box-title {
+  margin: 8px;
+  font-size: 31px;
+  font-weight: 600;
+  color: rgb(19, 204, 228);
+}
+
+.box-description {
+  margin: 8px;
+  font-size: 21px;
+  font-weight: 500;
+  color: rgba(44, 44, 44, 0.781);
+}
+.profile-search {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin: 10px 0 10px 0;
+  padding: 5px;
+}
+
 /* Footer Component */
 .footer {
   margin-top: 2em;
   background-color: rgba(44, 44, 44, 0.781);
-  /* border: solid red 5px; Remove later */
 }
 
 .website-links,
@@ -114,7 +165,6 @@ code {
   display: inline-block;
   width: 32.58%;
   text-align: center;
-  /* border: solid blue 5px; Remove later */
 }
 
 .footer-title,
@@ -123,5 +173,5 @@ code {
   margin: 0.25em;
   font-size: 0.8em;
   color: rgb(247, 242, 242);
-  /* border: solid green 1px; Remove later */
+
 }
