@@ -153,6 +153,19 @@ h1 {
   padding: 5px;
 }
 
+/* ProductList */
+.product-card {
+  display: flex;
+  border: 3px solid red;
+}
+
+.product-inner {
+  display: inline-flex;
+  flex-wrap: wrap;
+  width: 32%;
+  border: 2px dotted blue;
+}
+
 /* Footer Component */
 .footer {
   margin-top: 2em;
