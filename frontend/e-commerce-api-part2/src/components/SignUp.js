@@ -23,7 +23,7 @@ export default function SignUp () {
         try {
             setLoading(true);
             setErrorMessage(null);
-            const res = await fetch('/register', {
+            const res = await fetch('http://localhost:3001/users/register', {
                 method: "POST",
                 headers: {
                     "Content-type" : "application/json",
