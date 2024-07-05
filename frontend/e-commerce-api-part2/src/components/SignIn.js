@@ -2,35 +2,34 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function SignIn () {
-    const [formData, setFormData] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const handleChange = (e) => {
-        setFormData({...formData, [e.target.id]: e.target.value});  
-    };
-
-    const handleSubmit = async (e) => {
-        if (!formData.username || formData.password) {
-            setErrorMessage('All fields are required.');
-        }
+    const handleSubmit = async (event) => {
+        event.preventDefault();
         try {
             setLoading(true);
             setErrorMessage(null);
-            const res = await fetch('/login', {
-                method: "POST",
+            const res = await fetch('http://localhost:3001/users/login', {
+                method: 'POST',
                 headers: {
-                    "Content-type" : "application/json",
+                    "Content-type" : "application/json"
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                }),
             });
+            //console.log(res);
             const data = await res.json();
             if (data.success === false) {
-                setErrorMessage(data.message);
+                setErrorMessage(data.message)
+            } else {
+                setLoading(false)
             }
-            setLoading(false);
-
             if (res.ok) {
                 navigate("/profile");
             }
@@ -38,38 +37,35 @@ export default function SignIn () {
             setErrorMessage(error.message);
             setLoading(false);
         }
-    };
-
-    // Check if what we typed was logged. 
-    // console.log(formData);
+    }; 
     
     return (
         <section>
             <h1 id="signIn-title">Sign In</h1>
             <form onSubmit={handleSubmit} className="signIn-form">
-                <label for="username" className="signIn-label">
+                <label for="signIn-username" className="signIn-label">
                     Username
                     <div>
                         <input 
                         type="text"
-                        id="signIn-username"
+                        id="username"
                         name="username"
                         placeholder="Username"
                         autoComplete="username"
-                        onChange={handleChange}
+                        onChange={(e) => setUsername(e.target.value)}
                         />
                     </div>
                 </label>
-                <label for="password" className="signIn-label">
+                <label for="signIn-password" className="signIn-label">
                     Password
                     <div>
                         <input 
                             type="password"
-                            id="signIn-password"
+                            id="password"
                             name="password"
                             placeholder="Password"
                             autoComplete="current-password"
-                            onChange={handleChange}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
                 </label>

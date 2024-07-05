@@ -5,6 +5,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+const session = require('express-session');
+
 const port = 3001;
 const bodyParser = require('body-parser');
 const db = require('./routes/products');
@@ -31,8 +33,29 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+// Session
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    secure: true,
+    httpOnly: true,
+    sameSite: 'strict'
+  },
+}))
+
+// Users CRUD requests
 app.use('/', indexRouter);
 app.use('/users', cors(), usersRouter);
+
+// Logout function
+app.post('/logout', function(req, res, next) {
+  req.logout(function(err) {
+    if (err) {return next(err);}
+    res.redirect('/');
+  });
+});
 
 // Product CRUD requests
 app.get('/products', db.getProducts);
@@ -52,7 +75,6 @@ app.get('/order', cart.getOrder);
 
 // OAuth Configurtion
 const partials = require('express-partials');
-const session = require('express-session');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 

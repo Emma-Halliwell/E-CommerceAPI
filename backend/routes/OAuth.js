@@ -62,36 +62,3 @@
 //     res.redirect('/login');
 //   }
 // }
-
-
-// Sign in handle submit remove later
-
-const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (!formData.username || !formData.password) {
-        setErrorMessage('All fields are required.');
-    }
-    try {
-        setLoading(true);
-        setErrorMessage(null);
-        const res = await fetch('http://localhost:3001/users/login', {
-            method: "POST",
-            headers: {
-                "Content-type" : "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
-        const data = await res.json();
-        if (data.success === false) {
-            setErrorMessage(data.message);
-        }
-        setLoading(false);
-
-        if (res.ok) {
-            navigate("/profile");
-        }
-    } catch (error) {
-        setErrorMessage(error.message);
-        setLoading(false);
-    }
-};
