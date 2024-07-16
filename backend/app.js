@@ -1,88 +1,36 @@
+// Package Imports
 var createError = require('http-errors');
 var express = require('express');
 var cors = require('cors');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 const session = require('express-session');
-
-const port = 3001;
 const bodyParser = require('body-parser');
-const db = require('./routes/products');
-const cart = require('./routes/cart');
-const pool = require('./pool');
 require('dotenv').config();
-
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-
-var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-// app.set('view engine', 'ejs');
-
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-// Session
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: true,
-    httpOnly: true,
-    sameSite: 'strict'
-  },
-}))
-
-// Users CRUD requests
-app.use('/', indexRouter);
-app.use('/users', cors(), usersRouter);
-
-// Logout function
-app.post('/logout', function(req, res, next) {
-  req.logout(function(err) {
-    if (err) {return next(err);}
-    res.redirect('/');
-  });
-});
-
-// Product CRUD requests
-app.get('/products', db.getProducts);
-app.get('/products/category', db.getProductsCategory);
-app.get('/products/:id', db.getProductsById);
-
-// Cart 
-app.post('/cart', cart.postCart);
-app.get('/cart/:cart_id', cart.getCart);
-
-// Checkout
-app.post('/cart/:cart_id/checkout', cart.checkout);
-
-// Order
-app.post('/order/:checkout_id', cart.postOrder);
-app.get('/order', cart.getOrder);
 
 // OAuth Configurtion
 const partials = require('express-partials');
 const passport = require('passport');
 const GitHubStrategy = require('passport-github2').Strategy;
 
-// OAuth variable declarations
+// Database Imports
+const db = require('./routes/products');
+const cart = require('./routes/cart');
+const pool = require('./pool');
+
+// Router Imports
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+// Variable Declarations
+const port = 3001;
 const GITHUB_CLIENT_ID = process.env.GITHUB_CLIENT_ID;
 const GITHUB_CLIENT_SECRET = process.env.GITHUB_CLIENT_SECRET;
 
-// Passport Configuration
+var app = express();
+
+//Passport Configurations
 passport.use(
   new GitHubStrategy({
     clientID: GITHUB_CLIENT_ID,
@@ -102,10 +50,72 @@ passport.deserializeUser((user, done) => {
   done(null, user);
 });
 
+//Express Project Setup
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'jade');
+// app.set('view engine', 'ejs');
+app.use(logger('dev'));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(partials());
 
-// Routes
+// Session
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      secure: true,
+      httpOnly: true,
+      sameSite: 'strict',
+    },
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
+// Routes
+// Users CRUD requests
+app.use('/', indexRouter);
+app.use('/users', cors(), usersRouter);
+
+// Product CRUD requests
+app.get('/products', db.getProducts);
+app.get('/products/category', db.getProductsCategory);
+app.get('/products/:id', db.getProductsById);
+
+// Cart 
+app.post('/cart', cart.postCart);
+app.get('/cart/:cart_id', cart.getCart);
+
+// Checkout
+app.post('/cart/:cart_id/checkout', cart.checkout);
+
+// Order
+app.post('/order/:checkout_id', cart.postOrder);
+app.get('/order', cart.getOrder);
+
+// Logout
+// Needs looking at
+app.delete('/logout', (req, res) => {
+  if (req.session) {
+    req.session.destroy(err => {
+      if (err) {
+        res.status(400).send('Unable to logout');
+      } else {
+        res.send('logout Successful');
+      }
+    })
+  } else {
+    res.end();
+  }
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

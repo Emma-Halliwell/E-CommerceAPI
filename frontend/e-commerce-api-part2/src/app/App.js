@@ -8,6 +8,7 @@ import ProductList from '../components/ProductList'
 import SignUp from '../components/SignUp';
 import SignIn from '../components/SignIn';
 import Profile from '../components/Profile';
+import Logout from '../components/Logout';
 import Footer from '../components/Footer';
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="register" element={<SignUp />} />
           <Route path="login" element={<SignIn />} />
           <Route path="profile" element={<Profile />} />
+          <Route path="logout" element={<Logout />} />
         </Routes>
       </main>
       <Footer />

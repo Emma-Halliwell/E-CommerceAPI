@@ -12,6 +12,7 @@ export default function Header () {
             <NavLink to="register" className="link">Register</NavLink>
             <NavLink to='login' className="link">Sign In</NavLink>
             <NavLink to="profile" className="link">Profile</NavLink>
+            <NavLink to="logout" className="link">LogOut</NavLink>
         </div>
     )
 }
