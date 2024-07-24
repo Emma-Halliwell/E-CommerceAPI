@@ -109,10 +109,6 @@ h1 {
   color: black;
 }
 
-/* Profile Component */
-/* #profile-title {
-  font-size: 3em;
-} */
 .box-card {
   display: flex;
   margin: 20px 0 20px 0;
@@ -155,14 +151,16 @@ h1 {
 
 /* ProductList */
 .product-card {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: minmax(100px, auto);
+  gap: 10px;
   border: 3px solid red;
 }
 
-.product-inner {
-  display: inline-flex;
-  flex-wrap: wrap;
-  width: 32%;
+.data-item {
+  display: inline-grid;
+  white-space: pre-line;
   border: 2px dotted blue;
 }
 
