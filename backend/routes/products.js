@@ -32,8 +32,22 @@ const getProductsById = (req, res) => {
     });
 };
 
+const getProductsByName = (req, res) => {
+    const name = req.params.name;
+    pool.query('SELECT * FROM products JOIN price ON products.price = price.id WHERE name = $1',
+        [name], (error, results) => {
+            if (error) {
+                res.status(404).json({ "msg" : "Product could not be found"});
+            } else {
+                res.status(200).json(results.rows);
+            }
+        }
+    )
+};
+
 module.exports = {
     getProducts,
     getProductsCategory,
     getProductsById,
+    getProductsByName,
 };

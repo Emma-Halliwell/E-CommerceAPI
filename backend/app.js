@@ -88,7 +88,8 @@ app.use('/users', cors(), usersRouter);
 // Product CRUD requests
 app.get('/products', cors(), db.getProducts);
 app.get('/products/category', cors(), db.getProductsCategory);
-app.get('/products/:id', cors(), db.getProductsById);
+// app.get('/products/:id', cors(), db.getProductsById);
+app.get('/products/:name', cors(), db.getProductsByName);
 
 // Cart 
 app.post('/cart', cart.postCart);

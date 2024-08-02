@@ -164,6 +164,49 @@ h1 {
   border: 2px dotted blue;
 }
 
+/* ProductDetails */
+.detail-card {
+  display: inline-flex;
+  width: 100%;
+  text-align: center;
+}
+ #product-details, /*Remove Later*/
+ #checkout {
+  border: 2px solid red;
+ }
+
+ #productName,
+ #description,
+ #price,
+ #checkout-title { /*Romove Later*/
+  margin: 10px 0 10px 0;
+  border: 1px dotted blue;
+ }
+
+ #product-details {
+  width: 66%;
+ }
+
+ #productName,
+ #checkout-title {
+  font-size: 2em;
+  color: rgb(19, 204, 228);
+ }
+
+ #description {
+  font-size: 1.25em;
+ }
+
+ #checkout {
+  width: 33%;
+ }
+
+ #price {
+  font-size: 1.5em;
+  font-weight: 700;
+  text-align: left;
+ }
+
 /* Footer Component */
 .footer {
   margin-top: 2em;
