@@ -1,7 +1,5 @@
 import React from 'react';
 import companyLogo from './SportsGaloreLogo.jpeg';
-//import { useDispatch, useSelector } from 'react-redux';
-
 import { NavLink } from 'react-router-dom';
 
 export default function Header () {

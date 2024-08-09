@@ -23,12 +23,15 @@ export default function SignIn () {
                     password: password
                 }),
             });
-            //console.log(res);
+            // console.log(res);
             const data = await res.json();
+            // console.log(data);
+            const token = JSON.stringify(data).split(' ')[1];
+            // console.log(token);
             if (data.success === false) {
                 setErrorMessage(data.message)
             } else {
-                setLoading(false)
+                setLoading(false);
             }
             if (res.ok) {
                 navigate("/profile");
