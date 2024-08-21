@@ -22,6 +22,7 @@ const pool = require('./pool');
 // Router Imports
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var stripeRouter = require('./routes/stripe');
 
 // Variable Declarations
 const port = 3001;
@@ -84,6 +85,8 @@ app.use(passport.session());
 // Users CRUD requests
 app.use('/', indexRouter);
 app.use('/users', cors(), usersRouter);
+
+app.use('/stripe', stripeRouter);
 
 // Product CRUD requests
 app.get('/products', cors(), db.getProducts);

@@ -24,7 +24,7 @@ h1 {
   font-size: 1.5em;
   border: 1px solid rgb(19, 204, 228);
   border-radius: 5px;
-  box-shadow: 2px 4px rgb(19, 204, 228);
+  box-shadow: 2px 4px rgb(79, 87, 88);
   padding: 5px; 
 }
 
@@ -32,10 +32,40 @@ h1 {
 .header {
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   column-gap: 34px;
   align-items: center;
   margin-bottom: 2em;
   border: solid red 5px; /* Remove later */
+}
+
+#compostion-button {
+  position: absolute;
+  top: 30px;
+  right: 0;
+}
+
+#menu {
+  width: 85%;
+  height: 85%;
+  color: rgb(19, 204, 228);
+  padding-right: 8px;
+}
+
+#composition-menu {
+  display: flex;
+  align-items: center;
+}
+
+.hidden-link {
+  text-decoration: none;
+  color: rgb(19, 204, 228);
+  font-size: 1.5em;
+  border: 1px solid rgb(19, 204, 228);
+  border-radius: 5px;
+  box-shadow: 2px 4px rgb(79, 87, 88);
+  padding: 5px;
+  margin: 0;
 }
 
 /* Home Component */
