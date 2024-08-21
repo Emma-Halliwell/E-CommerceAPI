@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
+require('dotenv').config();
 
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
@@ -16,7 +17,7 @@ import Profile from '../components/Profile';
 import Logout from '../components/Logout';
 import Footer from '../components/Footer';
 
-const stripePromise = loadStripe("pk_test_51PngqOCPNXIMmAUuNkpBwj0uv0izmnKylBxrBnXx0NkjO1ecXhN8NvE7qzqaWHBKPQuhLzfG5puaJtKRGpikAhdu00se4WOWnf");
+const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
 
 function App() {
   const [clientSecret, setClientSecret] = useState('')
