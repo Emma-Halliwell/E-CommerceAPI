@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import './App.css';
-require('dotenv').config();
-
 import { Elements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
  
@@ -17,21 +15,37 @@ import Profile from '../components/Profile';
 import Logout from '../components/Logout';
 import Footer from '../components/Footer';
 
-const stripePromise = loadStripe(process.env.STRIPE_PUBLISHABLE_KEY);
+const stripePromise = loadStripe('pk_test_51PngqOCPNXIMmAUuNkpBwj0uv0izmnKylBxrBnXx0NkjO1ecXhN8NvE7qzqaWHBKPQuhLzfG5puaJtKRGpikAhdu00se4WOWnf');
 
 function App() {
-  const [clientSecret, setClientSecret] = useState('')
+  const [clientSecret, setClientSecret] = useState('');
+  const [dpmCheckerLink, setDpmCheckerLink] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:3000/stripe/paymentIntent')
+    fetch('http://localhost:3001/stripe/paymentIntent', {
+      method: 'POST',
+      headers: {
+        "Content-Type" : "application/json"
+      },
+      body: JSON.stringify({ items: [{ id: "mini-cones", amount: 900}] }),
+    })
     .then((res) => res.json())
-    .then((data) => setClientSecret(data))
+    .then((data) => {
+      setClientSecret(data.clientSecret);
+      setDpmCheckerLink(data.dpmCheckerLink);
+    })
     .catch((err => console.log(err)))
-  });
+  }, []);
+
+  const appearance = {
+    theme: 'stripe',
+  };
 
   const options = {
-    clientSecret: {clientSecret},
+    clientSecret,
+    appearance,
   }
+
   return (
     <Router>
       <Header />
@@ -40,12 +54,12 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="products" element={<ProductList />} />
           <Route path="product-details" element={<ProductDetails />} />
-          { stripePromise && (
-            <Route path="checkout" element={(
-              <Elements stripe={stripePromise} options={options}>
-                <Checkout />
-              </Elements>
-            )} />
+          { clientSecret && (
+            <Elements options={options} stripe={stripePromise}>
+              <Routes>
+                <Route path="checkout" element={<Checkout dpmCheckerLink={dpmCheckerLink}/>} />
+              </Routes>
+            </Elements>
           )}
           <Route path="register" element={<SignUp />} />
           <Route path="login" element={<SignIn />} />

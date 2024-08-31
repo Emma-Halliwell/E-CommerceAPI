@@ -1,27 +1,32 @@
 var express = require('express');
 var router = express.Router();
-// import * as Stripe from 'stripe';
 require('dotenv').config();
 
-var stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-//     apiVersion: '2024-06-20',
-//     typescript: true,
-// });
+const calculateOrderAmount = (items) => {
+    let total = 0;
+    items.forEach((item) => {
+        total += item.amount;
+    });
+    return total;
+};
 
 router.post('/paymentIntent', async (req, res) => {
-    const payment = await stripe.paymentIntents.create({
-        amount: 1000,
-        currency: 'GBP',
+    const { items } = req.body;
+
+    const paymentIntent = await stripe.paymentIntents.create({
+        amount: calculateOrderAmount(items),
+        currency: "gpb",
         automatic_payment_methods: {
             enabled: true,
-        },
+        }
     });
 
     res.send({
-        clientSecret: payment.client_secret,
+        clientSecret: paymentIntent.client_secret,
+        dpmCheckerLink: `https://dashboard.stripe.com/settings/payment_method/review?transaction_id=${paymentIntent.id}`,
     });
-})
+});
 
 module.exports = router;
