@@ -44,7 +44,7 @@ export default function ProductList () {
             .then((res) => res.json())
             .then (data => {displayData(data)})
             .catch((err) => console.log(err))
-    }, []);
+    });
 
     return (
         <section>

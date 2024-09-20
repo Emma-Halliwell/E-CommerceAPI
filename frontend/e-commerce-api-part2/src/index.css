@@ -79,7 +79,7 @@ h1 {
   font-size: 2em;
 }
 
-.search-bar {
+#search-bar {
   display: block;
   justify-content: center;
   align-items: center;
@@ -94,6 +94,15 @@ h1 {
   border: none;
   background: none;
   font-size: 1.8em;
+}
+
+#items {
+  display: block;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  font-size: 1.25em;
+  color: rgb(19, 204, 228)
 }
 
 /* Sign Up Component / Sign In Component */
