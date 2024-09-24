@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import { useNavigate } from 'react-router-dom';
 import Search from '../features/Search';
 import ItemContainer from '../features/ItemContainer';
 
