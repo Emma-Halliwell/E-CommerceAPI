@@ -188,6 +188,39 @@ h1 {
   padding: 5px;
 }
 
+/* User Details */
+#user-details {
+  text-align: center;
+}
+
+.required {
+  color: rgba(255, 0, 0, 0.87);
+}
+
+#statement {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+
+#user-details, label {
+  font-size: 1.2em;
+  margin: 5px 10px;
+}
+
+#personal, #address {
+  font-size: 1.6em;
+  color: rgb(19, 204, 228);
+}
+
+#userDetails-submit {
+  border: none;
+  background: rgb(3, 228, 3);
+  border-radius: 5px;
+  font-size: 1.25em;
+  margin: 10px 0;
+  padding: 8px;
+}
+
 /* ProductList */
 .product-card {
   display: grid;

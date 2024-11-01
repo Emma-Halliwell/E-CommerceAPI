@@ -36,7 +36,7 @@ export default function SignUp () {
             }
             setLoading(false);
             if (res.ok) {
-                navigate("/profile");
+                navigate("/userDetails");
             }
         } catch (error) {
             setErrorMessage(error.message);

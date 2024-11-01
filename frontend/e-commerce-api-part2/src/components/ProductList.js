@@ -20,7 +20,7 @@ export default function ProductList () {
                     const params = new URLSearchParams(url.search);
                     params.set('name', item.name);
                     if (res.ok) {
-                        navigate('/product-details', {state:{name: item.name, description: item.description, price: item.amount}});
+                        navigate('/product-details', {state:{id: item.id, name: item.name, description: item.description, price: item.amount}});
 
                     } else {
                         console.log('Something went wrong');

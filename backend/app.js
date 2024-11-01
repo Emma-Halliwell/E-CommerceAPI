@@ -81,6 +81,9 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Enable Cors()
+app.use(cors({ origin: 'http://localhost:3002' }));
+
 // Routes
 // Users CRUD requests
 app.use('/', indexRouter);
@@ -95,8 +98,8 @@ app.get('/products/category', cors(), db.getProductsCategory);
 app.get('/products/:name', cors(), db.getProductsByName);
 
 // Cart 
-app.post('/cart', cart.postCart);
-app.get('/cart/:cart_id', cart.getCart);
+app.post('/cart', cors(), cart.postCart);
+app.get('/cart/:cart_id', cors(), cart.getCart);
 
 // Checkout
 app.post('/cart/:cart_id/checkout', cart.checkout);

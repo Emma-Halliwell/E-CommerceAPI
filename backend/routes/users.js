@@ -74,6 +74,22 @@ router.put('/profile/:id', async (req, res, next) => {
   }).catch(next)
 });
 
-// Try i to implement changes to user_details table.
+router.post('/userDetails', async (req, res, next) => {
+  const {
+    username, first_name, middle_name, last_name, email, phone_number,
+    address_line_1, address_line_2, address_city, address_county, address_postcode, address_country,
+  } = req.body;
+  pool.query(
+    'INSERT INTO user_details (username, first_name, middle_name, last_name, email, phone_number, address_line_1, address_line_2, address_city, address_county, address_postcode, address_country) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)', 
+    [username, first_name, middle_name, last_name, email, phone_number,
+      address_line_1, address_line_2, address_city, address_county, address_postcode, address_country
+    ], (error, results) => {
+      if (error) {
+        res.status(400).json({ "msg" : "Could not post to user_details"});
+      } else {
+        res.status(200).json({ "msg" : "Successfully updated user details table."});
+      }
+    });
+});
 
 module.exports = router;

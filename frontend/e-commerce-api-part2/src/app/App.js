@@ -8,8 +8,10 @@ import Header from '../components/Header';
 import Home from '../components/Home';
 import ProductList from '../components/ProductList';
 import ProductDetails from '../components/ProductDetails';
+import Cart from '../components/Cart';
 import Checkout from '../components/Checkout';
 import SignUp from '../components/SignUp';
+import UserDetails from '../components/UserDetails';
 import SignIn from '../components/SignIn';
 import Profile from '../components/Profile';
 import Logout from '../components/Logout';
@@ -54,6 +56,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="products" element={<ProductList />} />
           <Route path="product-details" element={<ProductDetails />} />
+          <Route path="cart" element={<Cart />} />
           {/* { clientSecret && (
             <Elements options={options} stripe={stripePromise}>
               <Routes>
@@ -62,6 +65,7 @@ function App() {
             </Elements>
           )} */}
           <Route path="register" element={<SignUp />} />
+          <Route path="userDetails" element={<UserDetails />} />
           <Route path="login" element={<SignIn />} />
           <Route path="profile" element={<Profile />} />
           <Route path="logout" element={<Logout />} />
