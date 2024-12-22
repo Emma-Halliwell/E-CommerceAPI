@@ -5,7 +5,7 @@ export default function AddCart  () {
     const [username, setUsername] = useState("");
     const [product, setProduct] = useState("");
     const [quantity, setQuantity] = useState("");
-
+    const [cart_id, setCart_id] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
@@ -21,19 +21,43 @@ export default function AddCart  () {
                     product_id: product,
                     quantity: quantity,
                 })
-            })
+            });
+            const data = await res.json();
+            // console.log(data);
+            const cart = JSON.stringify(data);
+            // console.log(cart);
+            const cartId = cart.slice(1);
+            // console.log(cartId);
+            setCart_id(cartId);
             if (res.ok) {
-                navigate('/cart');
+                const displayData = () => {
+                    const dataContainer = document.getElementById('add_to_cart');
+                    dataContainer.innerHTML = '';
+                    const para = document.createElement('p');
+                    para.textContent = `Your cart Id number is ${cartId}`;
+                    para.textContent += 'Please remember your cart Id number. It will be needed to access your cart.';
+                    para.textContent += 'When ready please click below.';
+                    const button = document.createElement('button');
+                    button.setAttribute("id", "click_for_cart");
+                    button.innerText = 'Go to Cart';
+                    button.onclick = () => {
+                        navigate('/cart');
+                    };
+                    dataContainer.appendChild(para);
+                    dataContainer.appendChild(button);
+                }
+                displayData();
             }
-            
         } catch (error) {
             console.log(error.message);
         }
-    } 
+    };
+
+    // console.log(cart_id);
 
     return (
         // Add to cart function
-        <div>
+        <div id="add_to_cart">
             <form onSubmit={handleSubmit}>
                 <label for='username'>Username:</label>
                 <input type='text' id='username' onChange={(e) => setUsername(e.target.value)}/>

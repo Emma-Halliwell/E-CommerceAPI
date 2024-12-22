@@ -1,19 +1,26 @@
 const pool = require('../pool');
 
+// const postCart2 = (req, res) => {
+//   const cart_id = 
+//   const {username, product_id, quantity} = req.body;
+// }
+
 const postCart = (req, res) => {
     const {username, product_id, quantity} = req.body;
-    pool.query('INSERT INTO session_cart (username, product_id, quantity) VALUES ($1, $2, $3)', 
+    pool.query('INSERT INTO session_cart (username, product_id, quantity) VALUES ($1, $2, $3) RETURNING cart_id', 
     [username, product_id, quantity], (error, results) => {
       if (error) {
         res.status(400).json({ "msg" : "Could not update table session_cart"});
-      } else {
-        res.status(200).send(`Cart created using ${username}, item added ${product_id}, the quantity being ${quantity}`);
+      } else { 
+        // res.status(200).send(`Cart created using ${username}, item added ${product_id}, the quantity being ${quantity}.`);
+        res.status(200).json(results.rows);
       }
     });
 };
 
 const getCart = (req, res) => {
     const cart_id = parseInt(req.params.cart_id);
+    // const cart_id = req.body;
     pool.query(
       'SELECT * FROM session_cart JOIN products ON session_cart.product_id = products.id JOIN price ON products.price = price.id WHERE cart_id = $1', 
       [cart_id], (error, results) => {

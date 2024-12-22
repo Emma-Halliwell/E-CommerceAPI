@@ -31,7 +31,8 @@ export default function ProductList () {
             };
             const dataItem = document.createElement('div');
             dataItem.classList.add('data-item');
-            dataItem.textContent = `Name: ${item.name} \r\n`;
+            dataItem.textContent = `Id: ${item.id} \r\n`;
+            dataItem.textContent += `Name: ${item.name} \r\n`;
             dataItem.textContent += `Description: ${item.description} \r\n`;
             dataItem.textContent += `Price: ${item.amount}`;
             dataItem.addEventListener('click', handleClick);
